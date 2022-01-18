@@ -1,9 +1,8 @@
 import { writable } from 'svelte/store';
 import {supabase} from "../supabase.js";
-
 export const todos = writable([]);
 
-const loadTodos = async () => {
+export const loadTodos = async () => {
     const {data, error} = await supabase.from('todo').select();
     if(error) {
         return console.error(error);
@@ -12,13 +11,14 @@ const loadTodos = async () => {
 }
 loadTodos();
 
-export const addTodo = async (text) => {
-    const {data, error} = await supabase.from('todo').insert([{text}]);
-    todos.update(cur => [...cur, data[0]]);
-
+export const addTodo = async (text, user_id) => {
+    const {data, error} = await supabase.from('todo').insert([{text, user_id}]);
+    
     if(error) {
         return console.error(error);
     }
+
+    todos.update(cur => [...cur, data[0]]);
 };
 
 export const deleteTodo = async (id) => {
