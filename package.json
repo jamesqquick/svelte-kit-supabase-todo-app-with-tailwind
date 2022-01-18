@@ -21,7 +21,5 @@
 		"tailwindcss": "^2.2.19"
 	},
 	"type": "module",
-	"dependencies": {
-		"@supabase/supabase-js": "^1.28.6"
-	}
+	"dependencies": {}
 }
